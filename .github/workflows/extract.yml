@@ -1,0 +1,28 @@
+
+name: Extract FF DM
+
+on:
+  push:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract project
+        run: |
+          unzip -o FF-DM-MOBILE-SCENARIO.zip -d /tmp/ffdm
+          cp -R /tmp/ffdm/ff-dm/. .
+          rm FF-DM-MOBILE-SCENARIO.zip
+
+      - name: Save extracted files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Extract FF DM project"
+          git push
