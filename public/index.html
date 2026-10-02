@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101216">
+  <meta name="description" content="FF DM — conversation directe.">
+  <title>FF DM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main id="app">
+    <section id="entry" class="screen entry-screen">
+      <div class="entry-mark"><span></span><b>FF</b><small>DM</small></div>
+      <div class="entry-copy">
+        <p class="eyebrow">ESPACE DE CONVERSATION</p>
+        <h1>La discussion commence ici.</h1>
+        <p class="muted">Entre simplement pour accéder à la conversation.</p>
+      </div>
+      <form id="entryForm" class="entry-form" autocomplete="off">
+        <label><span>Nom</span><input id="entryName" type="text" maxlength="60" placeholder="Ton nom" autocomplete="off" required></label>
+        <label><span>Mot de passe</span><input id="entryPassword" type="password" maxlength="80" placeholder="••••••••" autocomplete="off" required></label>
+        <button class="primary" type="submit">Entrer <span>→</span></button>
+      </form>
+      <p class="entry-note">Accès direct · sans création de compte</p>
+    </section>
+
+    <section id="transition" class="screen transition-screen hidden" aria-live="polite">
+      <div class="matrix-grid" aria-hidden="true"></div>
+      <div class="transition-core"><div class="transition-symbol">FF<span>/</span></div><p class="eyebrow">CANAL SÉCURISÉ</p><h2>Connexion établie</h2><p>Préparation de la conversation…</p><div class="progress-track"><i></i></div></div>
+    </section>
+
+    <section id="chat" class="screen chat-screen hidden">
+      <header class="chat-header">
+        <div class="brand"><div class="brand-dot">FF</div><div><strong>FF DM</strong><span>en ligne</span></div></div>
+        <button id="newChat" class="icon-button" aria-label="Nouvelle conversation" title="Nouvelle conversation">＋</button>
+      </header>
+      <div id="toast" class="connection-toast" role="status">Connexion établie · Tu peux discuter.</div>
+      <div id="messages" class="messages" aria-live="polite"></div>
+      <div id="composerArea" class="composer-wrap">
+        <div class="composer">
+          <textarea id="messageInput" rows="1" maxlength="2000" enterkeyhint="send" placeholder="Écris ton message…" aria-label="Ton message"></textarea>
+          <button id="sendButton" class="send" aria-label="Envoyer">↑</button>
+        </div>
+        <div class="composer-hint">Entrée pour envoyer · Maj + Entrée pour aller à la ligne</div>
+      </div>
+      <button id="adminLink" class="power-link" type="button">Éteindre</button>
+    </section>
+
+    <section id="admin" class="screen admin-screen hidden">
+      <header class="admin-header">
+        <div><p class="eyebrow">ESPACE PRIVÉ</p><h2>Éteindre</h2><p class="admin-subtitle">Gère le parcours de discussion et consulte les messages.</p></div>
+        <button id="adminClose" class="secondary">Quitter</button>
+      </header>
+      <div class="admin-grid">
+        <article class="panel scenario-panel">
+          <div class="panel-title"><div><span class="kicker">ACCUEIL</span><h3>Phrase de bienvenue</h3></div><span class="status">Visible en premier</span></div>
+          <textarea id="welcomeEditor" class="welcome-editor" maxlength="2000" placeholder="Écris la phrase affichée à l’arrivée…"></textarea>
+          <div class="panel-title steps-heading"><div><span class="kicker">CONVERSATION</span><h3>Questions et réponses</h3></div><span id="stepCount" class="count">1 échange</span></div>
+          <div id="stepsEditor" class="steps-editor"></div>
+          <button id="addStep" class="add-step" type="button"><span>＋</span> Ajouter un échange</button>
+          <button id="saveScenario" class="primary save-scenario">Enregistrer les modifications</button>
+          <p id="saveState" class="save-state" role="status">Les changements s’appliqueront aux prochains messages envoyés.</p>
+          <p class="small-note">Tu peux modifier le scénario à tout moment. Les réponses déjà envoyées restent intactes dans les archives. Maximum : 30 échanges.</p>
+        </article>
+        <article class="panel history-panel">
+          <div class="panel-title"><div><span class="kicker">ARCHIVE</span><h3>Conversations reçues</h3></div><span id="messageCount" class="count">0</span></div>
+          <div id="history" class="history"></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <div id="adminModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+    <div class="modal-card">
+      <button id="modalClose" class="modal-close" aria-label="Fermer">×</button>
+      <p class="eyebrow">ACCÈS PRIVÉ</p><h2 id="adminTitle">Éteindre</h2>
+      <p class="muted">Entre le code administrateur pour continuer.</p>
+      <form id="adminForm"><input id="adminPassword" type="password" autocomplete="current-password" placeholder="Code administrateur" required><button class="primary" type="submit">Ouvrir</button></form>
+      <p id="adminError" class="error" role="alert"></p>
+    </div>
+  </div>
+  <script src="/app.js" defer></script>
+</body>
+</html>
